@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { stations } from "../data/stations";
-import type { StationId } from "../types";
 
-export function LeftRail({ current }: { current?: StationId }) {
+export function LeftRail({ current }) {
   return (
     <nav className="rail" aria-label="Trail stops">
       <h2>Trail stops</h2>

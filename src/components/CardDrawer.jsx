@@ -1,18 +1,14 @@
 import { useEffect } from "react";
-import type { Card } from "../types";
 import { sourceById } from "../data/sources";
 import { LearnChip } from "./LearnChip";
 
 export function CardDrawer({
   card,
   onClose,
-}: {
-  card: Card | null;
-  onClose: () => void;
 }) {
   useEffect(() => {
     if (!card) return;
-    const onKey = (e: KeyboardEvent) => {
+    const onKey = (e) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);

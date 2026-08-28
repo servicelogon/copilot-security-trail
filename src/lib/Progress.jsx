@@ -2,9 +2,7 @@ import {
   useCallback,
   useMemo,
   useState,
-  type ReactNode,
 } from "react";
-import type { ProgressState, RoleId, StationId } from "../types";
 import { ProgressContext } from "./progress-context";
 import {
   loadProgress,
@@ -14,22 +12,22 @@ import {
   toggleChecklist as persistToggle,
 } from "./storage";
 
-export function ProgressProvider({ children }: { children: ReactNode }) {
-  const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
+export function ProgressProvider({ children }) {
+  const [progress, setProgress] = useState(() => loadProgress());
 
-  const setRole = useCallback((role: RoleId | null) => {
+  const setRole = useCallback((role) => {
     setProgress(persistRole(role));
   }, []);
 
-  const stamp = useCallback((id: StationId) => {
+  const stamp = useCallback((id) => {
     setProgress(persistStamp(id));
   }, []);
 
-  const toggleCheck = useCallback((id: string) => {
+  const toggleCheck = useCallback((id) => {
     setProgress(persistToggle(id));
   }, []);
 
-  const viewCard = useCallback((id: string) => {
+  const viewCard = useCallback((id) => {
     setProgress(markCardViewed(id));
   }, []);
 

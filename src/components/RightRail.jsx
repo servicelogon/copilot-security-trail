@@ -1,7 +1,6 @@
-import type { Station } from "../types";
 import { sourceById } from "../data/sources";
 
-export function RightRail({ station }: { station: Station }) {
+export function RightRail({ station }) {
   return (
     <aside className="rail">
       <h2>Official Learn sources</h2>

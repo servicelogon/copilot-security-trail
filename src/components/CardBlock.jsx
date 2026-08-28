@@ -1,4 +1,3 @@
-import type { Card } from "../types";
 import { stationById } from "../data/stations";
 import { sourceById } from "../data/sources";
 import { useProgress } from "../lib/useProgress";
@@ -7,9 +6,6 @@ import { LearnChip } from "./LearnChip";
 export function CardBlock({
   card,
   onOpen,
-}: {
-  card: Card;
-  onOpen: (card: Card) => void;
 }) {
   const { role } = useProgress();
   const relevant = Boolean(role && card.highlightFor.includes(role));
@@ -18,7 +14,7 @@ export function CardBlock({
   return (
     <article
       className={`card${relevant ? " relevant" : ""}`}
-      style={{ ["--accent" as string]: accent }}
+      style={{ "--accent": accent }}
     >
       {relevant ? <span className="for-you-badge">For you</span> : null}
       <header>

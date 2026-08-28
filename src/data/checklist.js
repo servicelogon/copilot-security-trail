@@ -1,6 +1,5 @@
-import type { ChecklistItem } from "../types";
 
-export const checklist: ChecklistItem[] = [
+export const checklist = [
   // Station 1 — items stated on the privacy / architecture pages
   {
     id: "c-s1-permissions",

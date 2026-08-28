@@ -3,9 +3,6 @@ import { sourceById } from "../data/sources";
 export function LearnChip({
   sourceId,
   href,
-}: {
-  sourceId: string;
-  href?: string;
 }) {
   const source = sourceById(sourceId);
   const url = href ?? source?.url;

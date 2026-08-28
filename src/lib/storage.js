@@ -1,19 +1,18 @@
-import type { ProgressState, RoleId, StationId } from "../types";
 import { checklist } from "../data/checklist";
 
 const KEY = "copilot-security-trail.v1";
 
-const empty: ProgressState = {
+const empty = {
   stamps: {},
   viewedCards: [],
   checklist: [],
   role: null,
 };
 
-function parse(raw: string | null): ProgressState {
+function parse(raw) {
   if (!raw) return { ...empty, stamps: {}, viewedCards: [], checklist: [] };
   try {
-    const data = JSON.parse(raw) as Partial<ProgressState>;
+    const data = JSON.parse(raw);
     return {
       stamps: data.stamps ?? {},
       viewedCards: Array.isArray(data.viewedCards) ? data.viewedCards : [],
@@ -25,15 +24,15 @@ function parse(raw: string | null): ProgressState {
   }
 }
 
-export function loadProgress(): ProgressState {
+export function loadProgress() {
   return parse(localStorage.getItem(KEY));
 }
 
-export function saveProgress(next: ProgressState): void {
+export function saveProgress(next) {
   localStorage.setItem(KEY, JSON.stringify(next));
 }
 
-export function todayLocal(): string {
+export function todayLocal() {
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/New_York",
     year: "numeric",
@@ -46,9 +45,9 @@ export function todayLocal(): string {
   return `${y}-${m}-${d}`;
 }
 
-export function stampStation(id: StationId): ProgressState {
+export function stampStation(id) {
   const current = loadProgress();
-  const next: ProgressState = {
+  const next = {
     ...current,
     stamps: { ...current.stamps, [id]: current.stamps[id] ?? todayLocal() },
   };
@@ -56,26 +55,26 @@ export function stampStation(id: StationId): ProgressState {
   return next;
 }
 
-export function unstampStation(id: StationId): ProgressState {
+export function unstampStation(id) {
   const current = loadProgress();
   const stamps = { ...current.stamps };
   delete stamps[id];
-  const next: ProgressState = { ...current, stamps };
+  const next = { ...current, stamps };
   saveProgress(next);
   return next;
 }
 
-export function setRole(role: RoleId | null): ProgressState {
+export function setRole(role) {
   const current = loadProgress();
-  const next: ProgressState = { ...current, role };
+  const next = { ...current, role };
   saveProgress(next);
   return next;
 }
 
-export function toggleChecklist(id: string): ProgressState {
+export function toggleChecklist(id) {
   const current = loadProgress();
   const on = current.checklist.includes(id);
-  let next: ProgressState = {
+  let next = {
     ...current,
     checklist: on
       ? current.checklist.filter((x) => x !== id)
@@ -96,10 +95,10 @@ export function toggleChecklist(id: string): ProgressState {
   return next;
 }
 
-export function markCardViewed(id: string): ProgressState {
+export function markCardViewed(id) {
   const current = loadProgress();
   if (current.viewedCards.includes(id)) return current;
-  const next: ProgressState = {
+  const next = {
     ...current,
     viewedCards: [...current.viewedCards, id],
   };

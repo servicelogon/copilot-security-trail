@@ -1,6 +1,5 @@
-import type { Card } from "../types";
 
-export const cards: Card[] = [
+export const cards = [
   // ── Station 1 — Uma's 7 (Pam wording on cards 6 and 7) ──
   {
     id: "s1-org-graph",
@@ -384,5 +383,5 @@ export const cards: Card[] = [
 
 ];
 
-export const cardsForStation = (id: Card["stationId"]): Card[] =>
+export const cardsForStation = (id) =>
   cards.filter((c) => c.stationId === id);

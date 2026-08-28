@@ -11,7 +11,7 @@ export function RoleChips() {
           <button
             key={r.id}
             type="button"
-            className="chip"
+            className={`chip role-${r.id}`}
             aria-pressed={role === r.id}
             onClick={() => setRole(role === r.id ? null : r.id)}
           >

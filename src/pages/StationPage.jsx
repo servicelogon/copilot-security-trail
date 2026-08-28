@@ -9,14 +9,13 @@ import { Stamp } from "../components/Stamp";
 import { cardsForStation } from "../data/cards";
 import { stationById } from "../data/stations";
 import { useProgress } from "../lib/useProgress";
-import type { Card, StationId } from "../types";
 
 export function StationPage() {
   const { id } = useParams();
-  const stationId = Number(id) as StationId;
+  const stationId = Number(id);
   const station = stationById[stationId];
   const { progress, stamp } = useProgress();
-  const [open, setOpen] = useState<Card | null>(null);
+  const [open, setOpen] = useState(null);
   const list = useMemo(() => cardsForStation(stationId), [stationId]);
 
   if (!station) return <Navigate to="/" replace />;
@@ -24,7 +23,7 @@ export function StationPage() {
   const date = progress.stamps[station.id];
 
   return (
-    <div className="station-grid" style={{ ["--accent" as string]: station.color }}>
+    <div className="station-grid" style={{ "--accent": station.color }}>
       <LeftRail current={station.id} />
       <section>
         <div className="station-hero">

@@ -23,7 +23,7 @@ The content is paraphrased from Microsoft Learn pages fetched for this build. So
 - Trail checklist with source-linked action items
 - Source index for every Microsoft Learn article used
 - Bundled trail map, station icons, and stamp artwork
-- Vite, React, TypeScript, and React Router
+- Vite, React, JavaScript, and React Router
 
 ## Tech Stack
 
@@ -31,7 +31,7 @@ The content is paraphrased from Microsoft Learn pages fetched for this build. So
 | --- | --- |
 | Frontend | React 19 |
 | Build tool | Vite 8 |
-| Language | TypeScript |
+| Language | JavaScript / JSX |
 | Routing | React Router |
 | Linting | oxlint |
 | State persistence | Browser local storage |
@@ -108,24 +108,24 @@ Unknown routes redirect back to the home page.
 ├── src/
 │   ├── components/
 │   ├── data/
-│   │   ├── cards.ts
-│   │   ├── checklist.ts
-│   │   ├── sources.ts
-│   │   └── stations.ts
+│   │   ├── cards.js
+│   │   ├── checklist.js
+│   │   ├── sources.js
+│   │   └── stations.js
 │   ├── lib/
 │   ├── pages/
-│   ├── App.tsx
+│   ├── App.jsx
 │   ├── index.css
-│   └── main.tsx
+│   └── main.jsx
 ├── index.html
 ├── package.json
 ├── package-lock.json
-└── vite.config.ts
+└── vite.config.js
 ```
 
 ## Content And Sources
 
-The app keeps source records in `src/data/sources.ts`. Each source includes:
+The app keeps source records in `src/data/sources.js`. Each source includes:
 
 - Microsoft Learn title and URL
 - Last-reviewed date from the article metadata

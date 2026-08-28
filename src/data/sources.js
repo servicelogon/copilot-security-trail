@@ -1,6 +1,5 @@
-import type { Source } from "../types";
 
-export const sources: Source[] = [
+export const sources = [
   {
     id: "privacy",
     title: "Data, Privacy, and Security for Microsoft Copilot",
@@ -103,6 +102,6 @@ export const sources: Source[] = [
   },
 ];
 
-export function sourceById(id: string): Source | undefined {
+export function sourceById(id) {
   return sources.find((s) => s.id === id);
 }
