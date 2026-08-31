@@ -1,22 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Copilot Security Trail</title>
-    <meta
-      name="description"
-      content="A five-station park trail for organizations adopting Microsoft Copilot and Copilot Agents. Facts from Microsoft Learn only."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito:wght@500;600;700;800&family=Special+Elite&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copilot Security Trail</title>
+  <link rel="stylesheet" href="styles.css?v=20260830-sheet-center" />
+</head>
+<body>
+  <div class="app">
+    <div class="map-bleed" id="map-bleed">
+      <div class="map-stage" id="map-stage">
+        <img class="map-art" data-layer="map" src="assets/trail-map-basemap.png" width="960" height="640" alt="Dark map of land, water, and roads with a winding route of five stations." hidden />
+        <img class="map-art" data-layer="terrain" src="assets/trail-map-dark.png" width="960" height="640" alt="Dark terrain map with contour lines and a winding route of five stations." />
+        <svg class="route" viewBox="0 0 960 640" aria-hidden="true">
+          <defs>
+            <linearGradient id="copilot-route" x1="0" y1="0" x2="960" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#B4A0FF" />
+              <stop offset="50%" stop-color="#479EF5" />
+              <stop offset="100%" stop-color="#2A9D8F" />
+            </linearGradient>
+          </defs>
+          <path id="route-done" d="" fill="none" stroke="url(#copilot-route)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div id="pins"></div>
+      </div>
+    </div>
+
+    <header class="app-brand">
+      <img class="app-mark" src="assets/header-mark-32.svg" width="32" height="32" alt="" />
+      <span>Copilot Security Trail</span>
+    </header>
+
+    <div class="map-hud">
+      <div class="hud-mode" role="group" aria-label="Map style">
+        <button type="button" data-layer="map">Map</button>
+        <button type="button" data-layer="terrain" class="on">Terrain</button>
+      </div>
+      <div class="hud-chrome" aria-hidden="true">
+      <div class="hud-scale">
+        <div class="hud-scale-labels">
+          <span>0</span><span>125</span><span>250</span><span>375</span><span>500m</span>
+        </div>
+        <svg class="hud-scale-bar" viewBox="0 0 148 8" width="148" height="8" aria-hidden="true">
+          <path d="M.5 8 V2 M37 8 V2 M74 8 V2 M111 8 V2 M147.5 8 V2 M.5 8 H147.5" fill="none" stroke="#fff" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="hud-coords">39.7421° N, 104.9917° W</div>
+      </div>
+    </div>
+
+    <nav class="chrome-bar" aria-label="Primary">
+      <button type="button" data-view="map" class="on">
+        <span class="icon icon-map" aria-hidden="true"></span>Map
+      </button>
+      <button type="button" data-view="stations">
+        <span class="icon icon-sparkle" aria-hidden="true"></span>Stations
+      </button>
+      <button type="button" data-view="checklist">
+        <span class="icon icon-check" aria-hidden="true"></span>Checklist
+      </button>
+      <button type="button" data-view="sources">
+        <span class="icon icon-shield" aria-hidden="true"></span>Sources
+      </button>
+    </nav>
+    <aside class="sheet" id="sheet" hidden>
+      <div class="sheet-handle"></div>
+      <button type="button" class="sheet-close" id="sheet-close">Close</button>
+      <div class="sheet-body" id="sheet-body"></div>
+    </aside>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>
