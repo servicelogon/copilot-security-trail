@@ -1,4 +1,7 @@
+// Static content for the trail UI. The app renders directly from these arrays,
+// so ids and station numbers are the contracts between content, pins, and cards.
 window.TRAIL = {
+  // High-level stops shown on the map and in the station index.
   "stations": [
     {
       "id": 1,
@@ -63,6 +66,7 @@ window.TRAIL = {
       "icon": "checkmark_circle"
     }
   ],
+  // Used by cards and checklist items to call out audience-specific guidance.
   "roles": [
     {
       "id": "admin",
@@ -77,6 +81,7 @@ window.TRAIL = {
       "label": "Agent maker"
     }
   ],
+  // Pin positions in the 960x640 source artwork coordinate space.
   "hotspots": [
     {
       "id": 1,
@@ -104,6 +109,7 @@ window.TRAIL = {
       "y": 434.2
     }
   ],
+  // Sampled route geometry used to draw the completed trail overlay.
   "routePoints": [
     [
       95.0,
@@ -906,6 +912,7 @@ window.TRAIL = {
       487.5
     ]
   ],
+  // Indexes into routePoints where each station sits along the route.
   "routePinIndex": [
     20,
     60,
@@ -913,6 +920,7 @@ window.TRAIL = {
     139,
     179
   ],
+  // Station cards summarize what to know, why it matters, and what to configure.
   "cards": [
     {
       "id": "s1-org-graph",
@@ -1477,6 +1485,7 @@ window.TRAIL = {
       ]
     }
   ],
+  // Source metadata feeds both station source lists and the all-sources view.
   "sources": [
     {
       "id": "privacy",
@@ -1601,6 +1610,7 @@ window.TRAIL = {
       ]
     }
   ],
+  // Checklist items stay flat; app.js groups them by station while rendering.
   "checklist": [
     {
       "id": "c-s1-permissions",

@@ -1,9 +1,12 @@
 (function () {
   const T = window.TRAIL;
   const KEY = "copilot-security-trail.v1";
+
+  // Keep lookups cheap while rendering sheets and map pins.
   const srcById = Object.fromEntries(T.sources.map((s) => [s.id, s]));
   const stById = Object.fromEntries(T.stations.map((s) => [s.id, s]));
 
+  // Progress is local to this browser; role is session-only until the UI uses it.
   const state = load();
   let view = "map";
   let openStation = null;
@@ -25,6 +28,7 @@
     localStorage.setItem(KEY, JSON.stringify(state));
   }
   function today() {
+    // Stamps use a stable calendar date, not the viewer's current locale.
     return new Intl.DateTimeFormat("en-CA", {
       timeZone: "America/New_York",
       year: "numeric",
@@ -33,6 +37,7 @@
     }).format(new Date());
   }
   function consecutiveDone() {
+    // The route only paints through the first unfinished station.
     let n = 0;
     for (let i = 1; i <= 5; i++) {
       if (state.stamps[i]) n = i;
@@ -41,6 +46,7 @@
     return n;
   }
 
+  // Build the SVG path and its measured lengths from the map-coordinate route.
   const pts = T.routePoints;
   const path = pts
     .map(function (p, i) {
@@ -65,6 +71,7 @@
   doneEl.setAttribute("pathLength", String(totalLen));
 
   function renderRoute() {
+    // A dasharray is enough to reveal the completed portion of the route.
     const n = consecutiveDone();
     if (n <= 0) {
       doneEl.setAttribute("stroke-dasharray", "0 " + totalLen);
@@ -78,6 +85,7 @@
 
 
   function pinFace(s, earned, size) {
+    // Icon URLs are passed through CSS variables so one class can draw every pin.
     const cls =
       "pin-face" +
       (earned ? " earned" : "") +
@@ -105,6 +113,7 @@
   }
 
   function renderPins() {
+    // Hotspots are stored in the original 960x640 art space and scaled to CSS %.
     const wrap = document.getElementById("pins");
     wrap.innerHTML = T.hotspots
       .map(function (h) {
@@ -140,6 +149,7 @@
   }
 
   function learnChip(card) {
+    // Cards can override the station source when a more specific Learn page exists.
     const sid = card.sourceIds[0];
     const src = srcById[sid];
     const href = card.learnUrl || (src && src.url);
@@ -152,6 +162,7 @@
   }
 
   function cardHtml(card) {
+    // Role highlighting is data-driven, so the card template stays generic.
     const st = stById[card.stationId];
     const forYou =
       state.role &&
@@ -187,6 +198,7 @@
   }
 
   function openSheet(html) {
+    // Every non-map view reuses the same bottom/center sheet shell.
     const sheet = document.getElementById("sheet");
     document.getElementById("sheet-body").innerHTML = html;
     sheet.hidden = false;
@@ -194,6 +206,7 @@
   }
 
   function setHash(h) {
+    // Avoid handling the hashchange event caused by our own navigation update.
     if (location.hash === h) return;
     applyingHash = true;
     location.hash = h;
@@ -201,6 +214,7 @@
   }
 
   function showStation(id, fromHash) {
+    // Station sheets combine overview copy, completion state, cards, and sources.
     openStation = id;
     view = "stations";
     syncNav();
@@ -295,6 +309,7 @@
     if (!fromHash) setHash("#/checklist");
     renderPins();
     const groups = [];
+    // Group at render time so the data file can remain flat and easy to scan.
     T.checklist.forEach(function (item) {
       let g = groups.find(function (x) {
         return x.name === item.group;
@@ -382,6 +397,7 @@
   }
 
   function applyHash() {
+    // The hash is the only router this static app needs.
     const h = (location.hash || "#/").replace(/^#/, "") || "/";
     const station = h.match(/^\/station\/([1-5])$/);
     if (station) {
@@ -439,10 +455,12 @@
   });
 
   document.getElementById("sheet-body").addEventListener("click", function (e) {
+    // Sheet contents are rebuilt often, so actions are delegated from the shell.
     const open = e.target.closest("button[data-open]");
     if (open) showStation(Number(open.getAttribute("data-open")));
   });
   document.getElementById("sheet-body").addEventListener("change", function (e) {
+    // Checklist updates are small enough to store as an array of checked ids.
     const box = e.target.closest("input[data-check]");
     if (!box) return;
     const id = box.getAttribute("data-check");
@@ -464,6 +482,7 @@
   let zoom = 1;
 
   function setZoom(next, cx, cy) {
+    // Preserve the map point under the cursor/finger while the stage changes size.
     next = Math.min(ZMAX, Math.max(ZMIN, next));
     const rect = bleed.getBoundingClientRect();
     const px = cx == null ? rect.left + bleed.clientWidth / 2 : cx;
@@ -479,6 +498,7 @@
   }
 
   function centerRoute() {
+    // Start near the middle of the route instead of the top-left of the artwork.
     const h2 = T.hotspots[1];
     const h3 = T.hotspots[2];
     const x = (h2.x + h3.x) / 2 / 960;
@@ -489,6 +509,7 @@
 
   let pan = null;
   bleed.addEventListener("pointerdown", function (e) {
+    // Mouse and trackpad users can drag the map without stealing button clicks.
     if (e.pointerType === "touch") return;
     if (e.target.closest(".pin, button, a")) return;
     pan = { x: e.clientX, y: e.clientY, sl: bleed.scrollLeft, st: bleed.scrollTop };
@@ -510,6 +531,7 @@
   bleed.addEventListener(
     "wheel",
     function (e) {
+      // Plain wheel scrolls the map; modified wheel gestures zoom into the pointer.
       if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
       const factor = e.deltaY < 0 ? 1.08 : 1 / 1.08;
@@ -522,6 +544,7 @@
   bleed.addEventListener(
     "touchstart",
     function (e) {
+      // Native scrolling handles one finger; two fingers switch to app-controlled zoom.
       if (e.touches.length !== 2) {
         pinch = null;
         return;
