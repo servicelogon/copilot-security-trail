@@ -5,6 +5,8 @@
 
 Copilot Security Trail is a static web app for exploring Microsoft Copilot security, privacy, governance, and Zero Trust readiness concepts through a five-station interactive map.
 
+**View the live site:** https://servicelogon.github.io/copilot-security-trail/
+
 The app is built with plain HTML, CSS, and vanilla JavaScript. It has no package manager, build process, backend service, or runtime dependency beyond a modern browser.
 
 ## Features
