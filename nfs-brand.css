@@ -1,0 +1,97 @@
+/* New Frontier Security co-branding.
+   The trail's own UI is Microsoft Fluent (styles.css). This file adds only the
+   NFS layer: the byline under the title and the footer at the bottom of every
+   sheet. To keep the two systems apart, every selector here starts with .nfs-
+   and NFS tokens are --nfs-* on .nfs-scope only, never on :root (both systems
+   use names like --muted and --accent with different values). */
+
+.nfs-scope,
+.nfs-byline {
+  --nfs-ink: #f5f5f5;
+  --nfs-muted: #a1a1aa;
+  --nfs-line: #333338;
+  --nfs-accent: #f7ff00;
+  --nfs-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Byline under the app title ----------
+   Set in the trail's own Segoe and gray so it reads as part of the Fluent
+   header; NFS yellow appears only on hover and keyboard focus. */
+.nfs-titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+.nfs-byline {
+  /* .app-brand ignores the pointer so dragging the map still works across the
+     title; only this link takes clicks. */
+  pointer-events: auto;
+  align-self: flex-start;
+  margin-top: 1px;
+  color: var(--subtle);
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.nfs-byline:hover { color: var(--nfs-accent); }
+.nfs-byline:focus-visible {
+  color: var(--nfs-accent);
+  outline: 2px solid var(--nfs-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Footer at the bottom of every sheet ----------
+   Follows the footer on the other Toolbox tools (PasskeyLookup, Entra Token
+   Lab): a turning hairline mark, then a hairline rule over name, note, links. */
+.nfs-footer {
+  margin-top: 40px;
+  color: var(--nfs-muted);
+  font: 13px/1.5 var(--nfs-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.nfs-footer-mark { display: flex; justify-content: center; padding: 8px 0 20px; }
+.nfs-footer-wire {
+  display: block;
+  width: min(120px, 32vw);
+  height: auto;
+  aspect-ratio: 1;
+  color: color-mix(in srgb, var(--nfs-muted) 70%, var(--nfs-line));
+}
+.nfs-footer-base {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--nfs-line);
+  padding-top: 18px;
+}
+.nfs-footer-logo { display: inline-flex; min-height: 32px; align-items: center; }
+.nfs-footer-logo img { width: auto; height: 28px; max-width: none; }
+.nfs-footer-note { margin: 4px 0 0; color: var(--nfs-muted); font-size: 13px; }
+.nfs-footer-nav { display: flex; flex-wrap: wrap; gap: 22px; }
+.nfs-footer-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--nfs-muted);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.nfs-footer-nav a:hover,
+.nfs-footer-nav a[aria-current] { color: var(--nfs-ink); }
+.nfs-footer a:focus-visible { outline: 2px solid var(--nfs-accent); outline-offset: 3px; }
+
+@media (max-width: 480px) {
+  .nfs-footer { margin-top: 32px; }
+  .nfs-footer-base { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .nfs-footer-nav a { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nfs-byline, .nfs-footer-nav a { transition: none; }
+}

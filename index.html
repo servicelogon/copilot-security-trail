@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Copilot Security Trail</title>
+  <meta name="description" content="Five stops through Copilot security, data protection, and Zero Trust, built on Microsoft Learn sources. A New Frontier Security tool that runs entirely in your browser." />
+  <meta name="theme-color" content="#141414" />
+  <meta property="og:title" content="Copilot Security Trail · New Frontier Security" />
+  <meta property="og:description" content="Five stops through Copilot security, data protection, and Zero Trust, built on Microsoft Learn sources. A New Frontier Security tool that runs entirely in your browser." />
+  <link rel="icon" href="assets/nfs/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/nfs/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="assets/nfs/apple-touch-icon.png" />
+  <title>Copilot Security Trail · New Frontier Security</title>
   <link rel="stylesheet" href="styles.css?v=20260830-sheet-center" />
+  <link rel="stylesheet" href="nfs-brand.css?v=20261123-nfs" />
 </head>
 <body>
   <div class="app">
@@ -28,7 +36,10 @@
 
     <header class="app-brand">
       <img class="app-mark" src="assets/header-mark-32.svg" width="32" height="32" alt="" />
-      <span>Copilot Security Trail</span>
+      <div class="nfs-titles">
+        <span>Copilot Security Trail</span>
+        <a class="nfs-byline" href="https://newfrontiersecurity.net/tools#copilot-security-trail">by New Frontier Security</a>
+      </div>
     </header>
 
     <div class="map-hud">
@@ -67,10 +78,28 @@
       <div class="sheet-handle"></div>
       <button type="button" class="sheet-close" id="sheet-close">Close</button>
       <div class="sheet-body" id="sheet-body"></div>
+      <!-- New Frontier Security footer, the same frame as the other Toolbox tools. Styles live in nfs-brand.css. -->
+      <footer class="nfs-scope nfs-footer">
+        <div class="nfs-footer-mark"><canvas class="nfs-footer-wire" width="180" height="180" aria-hidden="true"></canvas></div>
+        <div class="nfs-footer-base">
+          <div>
+            <a class="nfs-footer-logo" href="https://newfrontiersecurity.net/" aria-label="New Frontier Security home">
+              <img src="assets/nfs/new-frontier-security-logo.png" width="837" height="349" alt="New Frontier Security" />
+            </a>
+            <p class="nfs-footer-note">Independent guide built on Microsoft Learn sources. Not affiliated with Microsoft.</p>
+          </div>
+          <nav class="nfs-footer-nav" aria-label="New Frontier Security">
+            <a href="https://newfrontiersecurity.net/">Blog</a>
+            <a href="https://newfrontiersecurity.net/newsroom">Newsroom</a>
+            <a href="https://newfrontiersecurity.net/tools" aria-current="page">Toolbox</a>
+          </nav>
+        </div>
+      </footer>
     </aside>
   </div>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="nfs-brand.js"></script>
 </body>
 </html>
