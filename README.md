@@ -36,9 +36,24 @@ The app is built with plain HTML, CSS, and vanilla JavaScript. It has no package
 |-- styles.css              # Layout, map, sheet, and component styling
 |-- app.js                  # Client-side routing, rendering, and local state
 |-- data.js                 # Trail stations, cards, sources, and route data
+|-- nfs-brand.css           # New Frontier Security co-branding (byline, sheet footer)
+|-- nfs-brand.js            # NFS footer mark: a turning wireframe shield
 |-- assets/                 # Map artwork and Fluent-style icons
+|   `-- nfs/                # NFS logo and favicons
 `-- output/pdf/             # Supporting generated PDF artifact
 ```
+
+## Branding
+
+The trail's own UI follows Microsoft Fluent: Segoe UI, the Fluent blue `--brand`, Fluent icons, and the Copilot route gradient. That styling lives in `styles.css` and stays as it is.
+
+The tool is part of the [New Frontier Security](https://newfrontiersecurity.net/tools) Toolbox, so it also carries a light NFS layer, the same frame used by Passkey AAGUID Lookup and Entra Token Lab:
+
+- the NFS favicon and a `· New Frontier Security` page title
+- a "by New Frontier Security" byline under the app title
+- an NFS footer at the bottom of every sheet: wireframe mark, logo, note, and Blog / Newsroom / Toolbox links
+
+All of it lives in `nfs-brand.css`, `nfs-brand.js`, and `assets/nfs/`. Both systems use variable names like `--muted` and `--accent` with different values, so every NFS selector starts with `.nfs-` and NFS tokens are `--nfs-*`, declared on NFS elements only and never on `:root`. Keep NFS yellow and Helvetica inside those elements.
 
 ## Getting Started
 
